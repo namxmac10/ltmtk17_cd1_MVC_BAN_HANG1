@@ -1,0 +1,48 @@
+<?php
+use App\Core\Router;
+use App\Controllers\StoreController;
+use App\Controllers\AuthController;
+use App\Controllers\CartController;
+use App\Controllers\CheckoutController;
+use App\Controllers\AccountController;
+use App\Controllers\AdminController;
+use App\Controllers\AdminProductController;
+use App\Controllers\AdminUserController;
+use App\Controllers\AdminOrderController;
+
+$router = new Router();
+$router->get('/', [StoreController::class, 'index']);
+$router->get('/products/{id}', [StoreController::class, 'show']);
+$router->get('/login', [AuthController::class, 'loginForm']);
+$router->post('/login', [AuthController::class, 'login']);
+$router->get('/register', [AuthController::class, 'registerForm']);
+$router->post('/register', [AuthController::class, 'register']);
+$router->post('/logout', [AuthController::class, 'logout']);
+$router->get('/cart', [CartController::class, 'index']);
+$router->post('/cart/add', [CartController::class, 'add']);
+$router->post('/cart/update', [CartController::class, 'update']);
+$router->get('/checkout', [CheckoutController::class, 'index']);
+$router->post('/checkout', [CheckoutController::class, 'place']);
+$router->get('/orders', [AccountController::class, 'orders']);
+$router->get('/orders/{id}', [AccountController::class, 'show']);
+$router->get('/admin', [AdminController::class, 'index']);
+$router->get('/admin/products', [AdminProductController::class, 'index']);
+$router->get('/admin/products/create', [AdminProductController::class, 'create']);
+$router->post('/admin/products', [AdminProductController::class, 'store']);
+$router->get('/admin/products/{id}/edit', [AdminProductController::class, 'edit']);
+$router->post('/admin/products/{id}/update', [AdminProductController::class, 'update']);
+$router->post('/admin/products/{id}/delete', [AdminProductController::class, 'delete']);
+$router->get('/admin/users', [AdminUserController::class, 'index']);
+$router->get('/admin/users/create', [AdminUserController::class, 'create']);
+$router->post('/admin/users', [AdminUserController::class, 'store']);
+$router->get('/admin/users/{id}/edit', [AdminUserController::class, 'edit']);
+$router->post('/admin/users/{id}/update', [AdminUserController::class, 'update']);
+$router->post('/admin/users/{id}/delete', [AdminUserController::class, 'delete']);
+$router->get('/admin/orders', [AdminOrderController::class, 'index']);
+$router->get('/admin/orders/create', [AdminOrderController::class, 'create']);
+$router->post('/admin/orders', [AdminOrderController::class, 'store']);
+$router->get('/admin/orders/{id}', [AdminOrderController::class, 'show']);
+$router->post('/admin/orders/{id}/update', [AdminOrderController::class, 'update']);
+$router->post('/admin/orders/{id}/delete', [AdminOrderController::class, 'delete']);
+
+return $router;
